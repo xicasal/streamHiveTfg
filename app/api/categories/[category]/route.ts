@@ -5,13 +5,14 @@ export async function GET(
   request: Request,
   { params }: { params: { category: string } }
 ) {
-  const { category } = params
-
-  if (!category || typeof category !== 'string') {
-    return NextResponse.json({ message: 'Categoría no válida' }, { status: 400 })
-  }
-
   try {
+
+    const { category } = params
+
+    if (!category || typeof category !== 'string') {
+      return NextResponse.json({ message: 'Categoría no válida' }, { status: 400 })
+    }
+
     const movies = await prismadb.movies.findMany({
       where: {
         genres: {
