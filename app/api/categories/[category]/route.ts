@@ -1,12 +1,13 @@
-import { NextResponse } from 'next/server'
+
+import { NextResponse, NextRequest } from 'next/server'
 import prismadb from '@/lib/prismadb'
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   context: { params: { category: string } }
 ) {
-  const { params } = context
-  const { category } = params
+  console.log('Request received for category:', context.params.category)
+  const { category } = context.params
 
   if (!category) {
     return NextResponse.json({ message: 'Id no válido' }, { status: 404 })
