@@ -1,11 +1,11 @@
-
 import { NextResponse } from 'next/server'
 import prismadb from '@/lib/prismadb'
 
 export async function GET(
-  _: unknown,
-  { params }: { params: { category: string } }
+  request: Request,
+  context: { params: { category: string } }
 ) {
+  const { params } = context
   const { category } = params
 
   if (!category) {
@@ -14,14 +14,16 @@ export async function GET(
 
   try {
     const movies = await prismadb.movies.findMany({
-      where: { genres: {
-        has: category
-      } }
+      where: {
+        genres: {
+          has: category,
+        },
+      },
     })
 
     return NextResponse.json(movies, { status: 200 })
   } catch (error) {
-    console.log(error)
+    console.error('Error al obtener las películas:', error)
     return NextResponse.json({ message: 'Error del servidor' }, { status: 500 })
   }
 }
