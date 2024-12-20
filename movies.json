@@ -1,0 +1,16 @@
+{
+  "_id":{ "$oid":"676329f1617387c4d95f2466" },
+  "title":"Shrek",
+  "description":"Hace mucho tiempo, en una lejanísima ciénaga, vivía un feroz ogro llamado Shrek. De repente, un día, su soledad se ve interrumpida por una invasión de sorprendentes personajes. Hay ratoncitos ciegos en su comida, un enorme y malísimo lobo en su cama, tres cerditos sin hogar y otros seres que han sido deportados de su tierra por el malvado Lord Farquaad. Para salvar su territorio, Shrek hace un pacto con Farquaad y emprende viaje para conseguir que la bella princesa Fiona acceda a ser la novia del Lord. En tan importante misión le acompaña un divertido burro, dispuesto a hacer cualquier cosa por Shrek: todo, menos guardar silencio.",
+  "videoUrl":"",
+  "poster":"https://image.tmdb.org/t/p/original/mZAwhoGH8isko20oE7xIQeXLe13.jpg",
+  "genres":["Aventura", "Fantasía", "Comedia"],
+  "cast":["Mike Myers", "Eddie Murphy", "Cameron Diaz", "John Lithgow"],
+  "producers":["Jeffrey Katzenberg", "Aron Warner", "John H. Williams"],
+  "directors":["Andrew Adamson", "Vicky Jenson"],
+  "duration":"142 minutos",
+  "year":"2001",
+  "imdbRating": 7.9,
+  "imdbUsersRating": 0.0,
+  "votes":[]
+}
