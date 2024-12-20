@@ -10,24 +10,7 @@ export default function CategoryPageByCategory() {
   const { category } = useParams()
   const decodedCategory = decodeURIComponent(category?.toString() || '') 
 
-  const categoryMap: Record<string, string> = {
-    'Acción': 'action',
-    'Aventura': 'adventure',
-    'Comedia': 'comedy',
-    'Documental': 'documentary',
-    'Drama': 'drama',
-    'Fantasía': 'fantasy',
-    'Terror': 'horror',
-    'Niños': 'kids',
-    'Misterio': 'mystery',
-    'Suspense': 'thriller',
-    'Romance': 'romance',
-    'Ciencia ficción': 'science-fiction',
-  }
-
-  const categoryName = categoryMap[decodedCategory] || decodedCategory
-
-  const { data: movies, isLoading } = useCategory(categoryName)
+  const { data: movies, isLoading } = useCategory(decodedCategory)
   console.log(movies)
 
   if (isLoading) {

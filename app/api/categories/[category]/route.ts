@@ -2,13 +2,18 @@
 import { NextResponse } from 'next/server'
 import prismadb from '@/lib/prismadb'
 
-export async function GET() {
-
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ category: string }> }
+) {
   try {
+
+    const category = (await params).category
+
     const movies = await prismadb.movies.findMany({
       where: {
         genres: {
-          has: "Documental",
+          has: category,
         },
       },
     })
