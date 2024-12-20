@@ -4,11 +4,11 @@ import { NextResponse } from 'next/server'
 import prismadb from '@/lib/prismadb'
 
 export async function DELETE(
-  _: unknown,
-  { params }: { params: { categoryId: string } }
+  request: Request,
+  { params }: { params: Promise<{ categoryId: string }> }
 ) {
   try {
-    const { categoryId } = params
+    const categoryId = (await params).categoryId
 
     if (!categoryId) {
       return NextResponse.json({ message: 'Datos incompletos' }, { status: 400 })

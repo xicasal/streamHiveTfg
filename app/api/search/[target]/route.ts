@@ -3,10 +3,10 @@ import prismadb from '@/lib/prismadb'
 import { NextResponse } from 'next/server'
 
 export async function GET(
-  _: unknown,
-  { params }: { params: { target: string } }
+  request: Request,
+  { params }: { params: Promise<{ target: string }> }
 ) {
-  const { target } = params
+  const target = (await params).target
 
   try {
     if (!target) {

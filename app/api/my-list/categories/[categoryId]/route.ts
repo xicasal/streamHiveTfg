@@ -3,12 +3,12 @@ import prismadb from '@/lib/prismadb'
 import { NextResponse } from 'next/server'
 
 export async function GET(
-  _: unknown,
-  { params }: { params: { categoryId: string } }
+  request: Request,
+  { params }: { params: Promise<{ categoryId: string }> }
 ) {
   
   try {
-    const categoryID = params.categoryId
+    const categoryID = (await params).categoryId
 
     if (!categoryID) {
       return NextResponse.json({ message: 'Id no válido' }, { status: 404 })

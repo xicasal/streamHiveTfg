@@ -4,10 +4,10 @@ import { NextResponse } from 'next/server'
 
 export async function POST(
   request: Request,
-  { params }: { params: { categoryId: string } }
+  { params }: { params: Promise<{ categoryId: string }> }
 ) {
   try {
-    const { categoryId } = params
+    const categoryId = (await params).categoryId
     const { title, color } = await request.json()
 
     if (!title || !color || !categoryId) {

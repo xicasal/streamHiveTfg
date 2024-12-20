@@ -6,10 +6,10 @@ import { NextResponse } from 'next/server';
 type Vote = { userId: string; rating: number };
 
 export async function GET(
-  _: unknown,
-  { params }: { params: { movieId: string } }
+  request: Request,
+  { params }: { params: Promise<{ movieId: string }> }
 ) {
-  const { movieId } = params;
+  const movieId = (await params).movieId
 
   if (!movieId) {
     return NextResponse.json({ message: 'Id no válido' }, { status: 404 });
