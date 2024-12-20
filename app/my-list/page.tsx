@@ -195,7 +195,7 @@ export default function MyListPage() {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-zinc-100 p-6 rounded-lg shadow-lg w-80 text-zinc-900">
               <h2 className="text-xl font-bold mb-4">Confirmar Eliminación</h2>
-              <p className="mb-6">¿Estás seguro de que quieres eliminar esta categoría? Las películas se moverán a "Películas de Mi lista".</p>
+              <p className="mb-6">¿Estás seguro de que quieres eliminar esta categoría? Las películas se moverán a &quot;Películas de Mi lista&quot;.</p>
               <div className="flex justify-end gap-4">
                 <button
                   onClick={() => setShowConfirmDelete(false)}
