@@ -1,13 +1,12 @@
-
-import { NextResponse, NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import prismadb from '@/lib/prismadb'
 
 export async function GET(
-  request: NextRequest,
-  context: { params: { category: string } }
+  _: unknown,
+  params : { params: { category: string } }
 ) {
-  console.log('Request received for category:', context.params.category)
-  const { category } = context.params
+  
+  const category = params
 
   if (!category) {
     return NextResponse.json({ message: 'Id no válido' }, { status: 404 })
@@ -17,7 +16,7 @@ export async function GET(
     const movies = await prismadb.movies.findMany({
       where: {
         genres: {
-          has: category,
+          has: category?.params.category,
         },
       },
     })
