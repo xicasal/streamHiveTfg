@@ -18,7 +18,7 @@ export default function MoviesByCategory({ categoryId, labelNoResults, isInMyLis
   const { data: movies, isLoading, mutate } = useMoviesFromCategory(categoryId)
 
   const handleMutate = useCallback(async () => {
-    let response = await axios.get(`/api/my-list/categories/${categoryId}`)
+    const response = await axios.get(`/api/my-list/categories/${categoryId}`)
 
     mutate({ movies: response.data })
     if (onMutate) {

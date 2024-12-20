@@ -4,8 +4,26 @@ import { useRef, useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import MovieItem from './MovieItem'
 
+
+interface Movie {
+  id: string
+  title: string
+  description: string
+  videoUrl: string
+  poster: string
+  genres: string[]
+  cast: string[]
+  producers: string[]
+  directors: string[]
+  votes: []
+  year: string
+  duration: string
+  imdbRating: number
+  imdbUsersRating: number
+}
+
 interface NavigationInterfaceProps {
-  data: Record<string, any>[]
+  data: Movie[]
   title: string
 }
 

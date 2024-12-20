@@ -11,7 +11,7 @@ export async function GET() {
       return NextResponse.json({ message: 'Usuario no autorizado' }, { status: 401 })
     }
 
-    let myList = await prismadb.myListUsers.findFirst({
+    const myList = await prismadb.myListUsers.findFirst({
       where: { userId: currentUser.id }
     })
 

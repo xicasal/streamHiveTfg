@@ -8,8 +8,32 @@ import { useState } from 'react'
 import useCategoriesFromMyList from '@/hooks/useCategoriesFromMyList'
 import { fetcherPost } from '@/lib/fetcher'
 
+
+interface Category {
+  id: string
+  name: string
+  color: string
+}
+
+interface Movie {
+  id: string
+  title: string
+  description: string
+  videoUrl: string
+  poster: string
+  genres: string[]
+  cast: string[]
+  producers: string[]
+  directors: string[]
+  votes: []
+  year: string
+  duration: string
+  imdbRating: number
+  imdbUsersRating: number
+}
+
 interface MovieItemProps {
-  item: Record<string, any>,
+  item: Movie,
   isInMyList?: boolean,
   onMutate?: () => void,
 }
@@ -18,7 +42,8 @@ export default function MovieItem({ item, isInMyList, onMutate }: MovieItemProps
   const router = useRouter()
   const [showOptions, setShowOptions] = useState(false)
 
-  const { data: categories } = isInMyList ? useCategoriesFromMyList() : { data: [] }
+  // const { data: categories } = isInMyList ? useCategoriesFromMyList() : { data: [] }
+  const { data: categories } = useCategoriesFromMyList()
 
   const toggleOptions = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -86,7 +111,7 @@ export default function MovieItem({ item, isInMyList, onMutate }: MovieItemProps
                 <div className="absolute transform -translate-x-1/2 -translate-y-72 w-48 bg-white shadow-lg rounded-lg z-50">
                   <p className="px-4 py-2 text-zinc-800 font-semibold text-center cursor-default">Mover a Categoría</p>
                   <ul>
-                    {categories && categories.map((category: any) => (
+                    {categories && categories.map((category: Category) => (
                       <li 
                         key={category.id}
                         onClick={(e) => {

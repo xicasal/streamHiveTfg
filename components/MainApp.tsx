@@ -45,7 +45,24 @@ export default function MainApp() {
   )
 }
 
-function shuffleArray(array: any[]) {
+interface Movie {
+  id: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  poster: string;
+  genres: string[];
+  cast: string[];
+  producers: string[];
+  directors: string[];
+  votes: [];
+  year: string;
+  duration: string;
+  imdbRating: number;
+  imdbUsersRating: number;
+}
+
+function shuffleArray(array: Movie[]): Movie[] {
   const shuffled = array.sort(() => Math.random() - 0.5)
   return shuffled.slice(0, 12)
 }

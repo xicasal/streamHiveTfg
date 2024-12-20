@@ -10,11 +10,11 @@ interface AccountMenuProps {
 
 export default function AccountMenu({ visible }: AccountMenuProps) {
 
+  const { data: user } = useCurrentUser()
   const router = useRouter()
 
   if(!visible) return null
 
-  const { data: user } = useCurrentUser()
 
   return (
     <div className="bg-zinc-800 w-56 absolute top-12 right-0 px-8 py-5 flex-col border-2 border-amber-600 rounded-xl flex">

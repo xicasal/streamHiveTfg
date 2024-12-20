@@ -2,7 +2,7 @@
 
 import Input from '@/components/Input'
 import axios from 'axios'
-import { useCallback, useState } from 'react'
+import { SetStateAction, useCallback, useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { FcGoogle } from 'react-icons/fc'
 import { FaGithub } from 'react-icons/fa'
@@ -79,7 +79,7 @@ const AuthPage = () => {
             {variant === 'register' && (
               <Input 
                 id="name"
-                onChange={(event: any) => setName(event.target.value)}
+                onChange={(event: { target: { value: SetStateAction<string> } }) => setName(event.target.value)}
                 label="Nombre"
                 value={name}
               />
@@ -87,7 +87,7 @@ const AuthPage = () => {
 
               <Input 
                 id="email"
-                onChange={(event: any) => setEmail(event.target.value)}
+                onChange={(event: { target: { value: SetStateAction<string> } }) => setEmail(event.target.value)}
                 label="Email"
                 type="email"
                 value={email}
@@ -95,7 +95,7 @@ const AuthPage = () => {
 
               <Input 
                 id="password"
-                onChange={(event: any) => setPassword(event.target.value)}
+                onChange={(event: { target: { value: SetStateAction<string> } }) => setPassword(event.target.value)}
                 label="Contraseña"
                 type="password"
                 value={password}

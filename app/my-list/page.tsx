@@ -23,6 +23,12 @@ const COLORS = [
   'bg-cyan-400',
 ]
 
+interface Category {
+  id: string
+  name: string
+  color: string
+}
+
 export default function MyListPage() {
 
   const { data: favorites, isLoading: favoriteLoading, mutate: favoritesMutate } = useFavoritesAux()
@@ -78,7 +84,7 @@ export default function MyListPage() {
     }
   }
 
-  const handleOpenEditCategory = (category: any) => {
+  const handleOpenEditCategory = (category: Category) => {
     console.log('Editando categoría:', category.id)
     setCategoryId(category.id)
     setTitle(category.name)
@@ -148,7 +154,7 @@ export default function MyListPage() {
           onMutate={handleMutate}
         />
 
-        {categories && categories.map((category: any) => (
+        {categories && categories.map((category: Category) => (
           <div key={category.id} className={`mt-6 p-4 rounded-lg ${category.color} text-amber-50 relative`}>
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
