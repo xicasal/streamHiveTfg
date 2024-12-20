@@ -1,39 +1,36 @@
-import NextAuth, { AuthOptions } from 'next-auth'
+import NextAuth from 'next-auth'
+import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prismadb from '@/lib/prismadb'
 import { compare } from 'bcrypt'
 
-import GithubProvider from 'next-auth/providers/github'
-import GoogleProvider from 'next-auth/providers/google'
-
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-
-
-export const authOptions: AuthOptions = {
+// Configuración de opciones de autenticación
+export const authOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || '',
-      clientSecret: process.env.GITHUB_SECRET || ''
+      clientSecret: process.env.GITHUB_SECRET || '',
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     }),
     CredentialsProvider({
       id: 'credentials',
       name: 'Credentials',
       credentials: {
         email: { label: 'Email', type: 'text' },
-        password: { label: 'Password', type: 'password' }
+        password: { label: 'Password', type: 'password' },
       },
-
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Email and password are required')
         }
 
         const user = await prismadb.users.findUnique({
-          where: { email: credentials.email }
+          where: { email: credentials.email },
         })
 
         if (!user || !user.hashedPassword) {
@@ -41,7 +38,7 @@ export const authOptions: AuthOptions = {
         }
 
         const isCorrectPassword = await compare(
-          credentials.password, 
+          credentials.password,
           user.hashedPassword
         )
 
@@ -50,8 +47,8 @@ export const authOptions: AuthOptions = {
         }
 
         return user
-      }
-    })
+      },
+    }),
   ],
   pages: {
     signIn: '/auth',
@@ -59,7 +56,7 @@ export const authOptions: AuthOptions = {
   debug: process.env.NODE_ENV === 'development',
   adapter: PrismaAdapter(prismadb),
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt' as const,
   },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
@@ -67,6 +64,7 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 }
 
+// Exporta el handler de NextAuth
 const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
