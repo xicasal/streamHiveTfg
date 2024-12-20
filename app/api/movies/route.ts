@@ -1,8 +1,9 @@
 
 import prismadb from '@/lib/prismadb'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../auth/[...nextauth]/route'
+
 import { NextResponse } from 'next/server'
+import { authOptions } from '../auth/[...nextauth]/route'
 
 export async function GET() {
   try {
