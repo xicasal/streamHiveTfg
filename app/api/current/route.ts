@@ -1,5 +1,6 @@
-import serverAuth from "@/lib/serverAuth"
-import { NextResponse } from "next/server"
+
+import serverAuth from '@/lib/serverAuth'
+import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {

@@ -1,7 +1,7 @@
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import prismadb from '@/lib/prismadb'
 import { getServerSession } from 'next-auth'
+import { authOptions } from './authOptions'
 
 
 export default async function serverAuth() {
