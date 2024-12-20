@@ -5,14 +5,14 @@ import { NextResponse } from "next/server"
 
 
 export async function GET(
-  _: unknown,
-  { params }: { params: { movieId: string } }
+  request: Request,
+  { params }: { params: Promise<{ movieId: string }> }
 ) {
   try {
 
     await serverAuth()
 
-    const { movieId } = params
+    const movieId = (await params).movieId
 
     console.log(movieId)
 
