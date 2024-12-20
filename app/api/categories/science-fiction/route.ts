@@ -8,7 +8,7 @@ export async function GET() {
     const movies = await prismadb.movies.findMany({
       where: {
         genres: {
-          has: "Acción",
+          has: "Ciencia ficción",
         },
       },
     })
