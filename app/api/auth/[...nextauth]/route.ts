@@ -7,7 +7,7 @@ import prismadb from '@/lib/prismadb'
 import { compare } from 'bcrypt'
 
 // Configuración de opciones de autenticación
-export const authOptions = {
+const authOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || '',
