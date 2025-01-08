@@ -1,17 +1,16 @@
 'use client'
 
-import ShowLoading from "@/components/loadingComponent/ShowLoading"
-import Navbar from "@/components/Navbar"
-import useAdminMovies from "@/hooks/useAdminMovies"
-import useCurrentUser from "@/hooks/useCurrentUser"
-import { fetcherDelete } from "@/lib/fetcher"
-import { set } from "lodash"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
-import { BiShow } from "react-icons/bi"
-import { FaRegEdit } from "react-icons/fa"
-import { IoIosAddCircle } from "react-icons/io"
-import { MdDelete } from "react-icons/md"
+import ShowLoading from '@/components/loadingComponent/ShowLoading'
+import Navbar from '@/components/Navbar'
+import useAdminMovies from '@/hooks/useAdminMovies'
+import useCurrentUser from '@/hooks/useCurrentUser'
+import { fetcherDelete } from '@/lib/fetcher'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { BiShow } from 'react-icons/bi'
+import { FaRegEdit } from 'react-icons/fa'
+import { IoIosAddCircle } from 'react-icons/io'
+import { MdDelete } from 'react-icons/md'
 
 interface Movie {
   id: string

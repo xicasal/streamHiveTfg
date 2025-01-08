@@ -22,9 +22,6 @@ interface User {
   photoProfile?: string
   userName?: string
   role: string
-  sessions: any[]
-  accounts: any[]
-  myList: any[]
 }
 
 export default function AdminUsersPage() {
