@@ -150,7 +150,7 @@ export default function Comments({ movieId }: CommentsProps) {
           <div className="w-3/4 bg-amber-50 p-6 rounded-lg text-center">
             <h2 className="text-xl font-semibold text-zinc-800 mb-4">Eliminar Comentario</h2>
             <p className="mb-4 text-zinc-800">¿Estás seguro de que deseas eliminar este comentario?</p>
-            <p className="text-gray-700">"{commentToDelete.comment}"</p>
+            <p className="text-gray-700">&quot;{commentToDelete.comment}&quot;</p>
             <div className="flex justify-center gap-4 mt-4">
               <button 
                 onClick={() => setCommentToDelete(null)} 
