@@ -12,6 +12,7 @@ export default function SearchPage() {
   const target = params?.target as string
   const { data: movies, isLoading } = useSearchMovies(target)
 
+  const targetDecoded = decodeURIComponent(target)
   console.log(movies)
 
   if (isLoading) {
@@ -26,7 +27,7 @@ export default function SearchPage() {
       
       <div className="min-h-screen bg-zinc-800 text-amber-50 p-10">
         <h1 className="text-3xl font-bold mb-8 mt-10">
-          Resultados para &quot;{target}&quot;
+          Resultados para "{targetDecoded}"
         </h1>
         <ShowMoviesByCols movies={movies} labelNoResults="No hay resultados para esta búsqueda" />
       </div>

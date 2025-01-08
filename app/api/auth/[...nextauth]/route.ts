@@ -34,7 +34,7 @@ const authOptions = {
         })
 
         if (!user || !user.hashedPassword) {
-          throw new Error('Email does not exist')
+          throw new Error('No existe un usuario con ese email')
         }
 
         const isCorrectPassword = await compare(
@@ -43,7 +43,7 @@ const authOptions = {
         )
 
         if (!isCorrectPassword) {
-          throw new Error('Password is incorrect')
+          throw new Error('Contraseña incorrecta')
         }
 
         return user

@@ -21,6 +21,10 @@ const AuthPage = () => {
 
 
   const login = useCallback(async () => {
+    if (!email || !password) {
+      return alert('Por favor, rellena todos los campos')
+    }
+
     try {
       await signIn('credentials', {
         email, 
@@ -110,7 +114,7 @@ const AuthPage = () => {
               {variant === 'login' ? 'Iniciar sesión' : 'Registrarse'}
             </button>
 
-            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+            {/* <div className="flex flex-row items-center gap-4 mt-8 justify-center">
 
               <div
                 onClick={() => signIn('google', { callbackUrl: '/profiles' })}
@@ -126,7 +130,7 @@ const AuthPage = () => {
                 <FaGithub size={30} color='white'/>
               </div>
 
-            </div>
+            </div> */}
 
             <p className="text-neutral-700 mt-12">
               {variant === 'login' ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}

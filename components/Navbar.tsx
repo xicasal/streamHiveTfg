@@ -9,6 +9,7 @@ import useCurrentUser from '@/hooks/useCurrentUser'
 import { BiSolidCategory } from 'react-icons/bi'
 import { useRouter } from 'next/navigation'
 import SearchButton from './SearchButton'
+import { CiSettings } from 'react-icons/ci'
 
 
 const TOP_OFFSET = 66
@@ -22,6 +23,8 @@ export default function Navbar() {
   const [showShortScreenMenu, setShowShortScreenMenu] = useState(false)
   const [showAccountMenu, setShowAccountMenu] = useState(false)
   const [showBackground, setShowBackground] = useState(false)
+
+  const adminUser = user?.role === 'admin'
 
   const toggleShortScreenMenu = useCallback(() => {
     setShowShortScreenMenu((current) => !current)
@@ -93,10 +96,19 @@ export default function Navbar() {
 
           <div
             onClick={() => router.push('/categories')}
-            className="w-10 h-10 text-amber-600 bg-amber-100 hexagon hover:text-amber-600 hover:bg-zinc-800 cursor-pointer transition hover:scale-125 flex justify-center items-center">
+            className="w-10 h-10 text-amber-600 bg-amber-100 hexagon hover:text-amber-600 hover:bg-zinc-800 cursor-pointer transition hover:scale-125 flex justify-center items-center"
+          >
             <BiSolidCategory size={20}/>
           </div>
 
+          {adminUser && (
+            <div
+              onClick={() => router.push('/admin')}
+              className="w-10 h-10 text-amber-600 bg-amber-100 hexagon hover:text-amber-600 hover:bg-zinc-800 cursor-pointer transition hover:scale-125 flex justify-center items-center"
+            >
+              <CiSettings size={25}/>
+            </div>
+          )}
 
           <div 
             className="relative"
@@ -117,8 +129,6 @@ export default function Navbar() {
               
             )}
           </div>
-
-        
 
         </div>
 

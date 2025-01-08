@@ -25,9 +25,11 @@ model Users {
   favoriteIds       String[]      @db.ObjectId
   photoProfile      String?
   userName          String?
+  role              String        @default("user")
   sessions          Session[]
   accounts          Account[]
   myList            MyListUsers[] 
+  Comments          Comments[]
 }
 
 model Account {
@@ -82,6 +84,7 @@ model Movies {
   imdbRating        Float
   imdbUsersRating   Float
   votes             Json?         @default("[]")
+  Comments          Comments[]
 }
 
 model Categories {
@@ -101,4 +104,16 @@ model MyListUsers {
   categories        Categories[]
   
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Comments {
+  id                String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String        @db.ObjectId
+  movieId           String        @db.ObjectId
+  userName          String
+  comment           String
+  createdAt         DateTime      @default(now())
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie Movies @relation(fields: [movieId], references: [id], onDelete: Cascade)
 }

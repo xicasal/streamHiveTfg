@@ -42,6 +42,7 @@ export async function POST(request: Request) {
         name, 
         hashedPassword,
         userName,
+        role: 'user',
         photoProfile: randomPhotoProfile,
         image: '',
         emailVerified: new Date(),

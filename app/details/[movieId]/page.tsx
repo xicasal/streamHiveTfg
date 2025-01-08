@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { VotingPanel } from '@/components/VotingPanel'
 import FavoriteButton from '@/components/FavoriteButton'
 import ShowLoading from '@/components/loadingComponent/ShowLoading'
+import Comments from '@/components/detailsPage/Comments'
 
 interface Vote {
   userId: string
@@ -130,6 +131,9 @@ export default function Details() {
           <h2 className="text-2xl font-semibold text-amber-400 mb-2 underline underline-offset-2">Elenco</h2>
           <p className="text-lg text-amber-50">{movie?.cast?.join(", ")}</p>
         </div>
+
+        <Comments movieId={movie.id} />
+
       </div>
     </div>
   )
