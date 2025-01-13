@@ -36,18 +36,11 @@ export default function AdminMoviesPage() {
   const { data: currentUser, isLoading: isLoadingCurrentUser  } = useCurrentUser()
   const { data: movies, isLoading: isLoadingMovies, mutate } = useAdminMovies()
 
-  const [sortedMovies, setSortedMovies] = useState<Movie[]>([])
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null)
   const [movieToDelete, setMovieToDelete] = useState<Movie | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [searchMovie, setSearchMovie] = useState('')
 
-  useEffect(() => {
-    if (movies) {
-      const sorted = [...movies].sort((a, b) => a.title.localeCompare(b.title))
-      setSortedMovies(sorted)
-    }
-    mutate()
-  }, [movies])
 
   const handleEditClick = (movie: Movie) => {
     router.push(`/admin/movies/update/${movie.id}`)
@@ -87,6 +80,12 @@ export default function AdminMoviesPage() {
     )
   }
 
+  const filteredAndSortedMovies = movies
+    ?.filter((movie: { title: string }) => 
+      movie.title.toLowerCase().includes(searchMovie.toLowerCase())
+    )
+    .sort((a: Movie, b: Movie) => a.title.localeCompare(b.title))
+
   return (
     <div className="flex flex-col min-h-screen">
               
@@ -101,6 +100,16 @@ export default function AdminMoviesPage() {
               <IoIosAddCircle />
             </button>
           </div>
+
+          <div className="flex justify-center mb-1">
+          <input 
+            type="text"
+            placeholder="Búsqueda por título..."
+            value={searchMovie}
+            onChange={(event) => setSearchMovie(event.target.value)}
+            className="p-2 border rounded"
+          />
+        </div>
           
           <div className="container mx-auto p-8 bg-amber-800 text-amber-50 rounded-lg">
             <ul className="w-full">
@@ -108,7 +117,7 @@ export default function AdminMoviesPage() {
                 <span className="text-left">Nombre</span>
                 <span className="text-right">Opciones</span>
               </li>
-              {sortedMovies.map((movie: Movie) => (
+              {filteredAndSortedMovies.map((movie: Movie) => (
                 <li key={movie.id} className="p-2 border-b border-zinc-800 grid grid-cols-2 text-center">
                   <span className="text-left">{movie.title}</span>
                   <span className="text-right flex justify-end gap-2">

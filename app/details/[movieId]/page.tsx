@@ -10,6 +10,7 @@ import { VotingPanel } from '@/components/VotingPanel'
 import FavoriteButton from '@/components/FavoriteButton'
 import ShowLoading from '@/components/loadingComponent/ShowLoading'
 import Comments from '@/components/detailsPage/Comments'
+import useCurrentUser from '@/hooks/useCurrentUser'
 
 interface Vote {
   userId: string
@@ -20,10 +21,13 @@ export default function Details() {
   const router = useRouter()
   const params = useParams()
   const movieId = params?.movieId
-  const { data: movie, refreshMovie, isLoading } = useMovie(movieId as string)
+
+  const { data: movie, refreshMovie, isLoading: isLoadingMovies } = useMovie(movieId as string)
+  const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser()
 
   const [isVoting, setIsVoting] = useState(false)
   const [userRating, setUserRating] = useState("n/a")
+  const [userHasVoted, setUserHasVoted] = useState(false)
 
   useEffect(() => {
     const calculateUserRating = () => {
@@ -38,13 +42,20 @@ export default function Details() {
     }
 
     setUserRating(calculateUserRating())
+
+    if (currentUser && movie?.votes) {
+      const userVote = movie.votes.find((vote: { userId: string }) => vote.userId === currentUser.id)
+      if (userVote) {
+        setUserHasVoted(true)
+      }
+    }
   }, [movie?.votes])
 
   const handleVoteSubmit = async () => {
     await refreshMovie()
   }
 
-  if (isLoading) {
+  if (isLoadingMovies || isLoadingCurrentUser) {
     return (
       <ShowLoading />
     )
@@ -101,7 +112,7 @@ export default function Details() {
               className="flex flex-row items-center bg-zinc-700 text-amber-50 px-4 py-2 rounded-md hover:bg-zinc-600 hover:scale-110"
             >
               <PiRankingBold size={20} className="mr-2 text-amber-50"/>
-              Puntuar
+              {userHasVoted ? "Volver a puntuar" : "Puntuar"}
             </button>
             <FavoriteButton movieId={movieId as string}/>
           </div>

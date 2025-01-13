@@ -32,6 +32,7 @@ export default function AdminUsersPage() {
   const [selectedRole, setSelectedRole] = useState('user')
   const [deletingUser, setDeletingUser] = useState<User | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [searchUser, setSearchUser] = useState('')
 
   if (currentUser?.role !== 'admin') {
     return (
@@ -92,6 +93,11 @@ export default function AdminUsersPage() {
     )
   }
 
+  const filteredAndSortedUsers = users?.filter((user: { name: string }) => 
+    user.name.toLowerCase().includes(searchUser.toLowerCase())
+  )
+  .sort((a: User, b: User) => a.name.localeCompare(b.name))
+
   return (
     <div className="flex flex-col min-h-screen">
           
@@ -102,7 +108,17 @@ export default function AdminUsersPage() {
           Gestión de usuarios
         </h1>
       </div>
-      
+
+      <div className="flex justify-center mb-1">
+          <input 
+            type="text"
+            placeholder="Búsqueda por nombre..."
+            value={searchUser}
+            onChange={(event) => setSearchUser(event.target.value)}
+            className="p-2 border rounded"
+          />
+        </div>
+
       <div className="container mx-auto p-8 bg-amber-600 text-amber-50 rounded-lg">
         <ul className="w-full">
           <li className="p-2 border-b border-zinc-800 font-bold grid grid-cols-3 text-center">
@@ -110,7 +126,7 @@ export default function AdminUsersPage() {
             <span>Rol</span>
             <span className="text-right">Opciones</span>
           </li>
-          {users?.map((user: User) => (
+          {filteredAndSortedUsers?.map((user: User) => (
             <li key={user.id} className="p-2 border-b border-zinc-800 grid grid-cols-3 text-center">
               <span className="text-left">{user.name}</span>
               <span>{user.role}</span>
